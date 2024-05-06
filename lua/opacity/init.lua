@@ -412,6 +412,30 @@ M.brightness_down = function()
   shade.change_brightness(adjusted)
 end
 
+M.focus_lost = function()
+  if not state.active then
+    return
+  end
+
+  local adjusted = 20 + state.opacity_step
+  if adjusted > 99 then
+    adjusted = 99
+  end
+  shade.change_brightness(adjusted)
+end
+
+M.focus_get = function()
+  if not state.active then
+    return
+  end
+
+  local adjusted = 50 + state.opacity_step
+  if adjusted > 99 then
+    adjusted = 99
+  end
+  shade.change_brightness(adjusted)
+end
+
 M.toggle = function()
   if state.active then
     remove_all_overlays()
