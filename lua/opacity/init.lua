@@ -413,10 +413,6 @@ M.brightness_down = function()
 end
 
 M.focus_lost = function()
-  if not state.active then
-    return
-  end
-
   local adjusted = 20 + state.opacity_step
   if adjusted > 99 then
     adjusted = 99
@@ -425,10 +421,6 @@ M.focus_lost = function()
 end
 
 M.focus_get = function()
-  if not state.active then
-    return
-  end
-
   local adjusted = 50 + state.opacity_step
   if adjusted > 99 then
     adjusted = 99
