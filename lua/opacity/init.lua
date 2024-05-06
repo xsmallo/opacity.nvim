@@ -143,7 +143,7 @@ end
 --
 
 local function map_key(mode, key, action)
-  local req_module = ("<cmd>lua require'shade'.%s<CR>"):format(action)
+  local req_module = ("<cmd>lua require'opacity'.%s<CR>"):format(action)
   vim.api.nvim_set_keymap(mode, key, req_module, { noremap = true, silent = true })
 end
 
@@ -259,10 +259,10 @@ shade.init = function(opts)
   api.nvim_exec([[
     augroup shade
     au!
-    au WinEnter,VimEnter * call v:lua.require'shade'.autocmd('WinEnter',  win_getid())
-    au WinClosed         * call v:lua.require'shade'.autocmd('WinClosed', expand('<afile>'))
-    au TabEnter          * call v:lua.require'shade'.autocmd('TabEnter',  win_getid())
-    au OptionSet         diff call v:lua.require'shade'.autocmd('OptionSet', win_getid())
+    au WinEnter,VimEnter * call v:lua.require'opacity'.autocmd('WinEnter',  win_getid())
+    au WinClosed         * call v:lua.require'opacity'.autocmd('WinClosed', expand('<afile>'))
+    au TabEnter          * call v:lua.require'opacity'.autocmd('TabEnter',  win_getid())
+    au OptionSet         diff call v:lua.require'opacity'.autocmd('OptionSet', win_getid())
     augroup END
   ]], false)
 
