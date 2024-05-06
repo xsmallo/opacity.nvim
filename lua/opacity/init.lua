@@ -418,7 +418,7 @@ M.brightness_down = function()
   if adjusted < 0 then
     adjusted = 0
   end
-  shade.change_focus_brightness(adjusted)
+  shade.change_brightness(adjusted)
 end
 
 M.focus_lost = function()
@@ -430,7 +430,7 @@ M.focus_lost = function()
 end
 
 M.focus_get = function()
-  local adjusted = 50 + state.opacity_step
+  local adjusted = 50
   if adjusted > 99 then
     adjusted = 99
   end
