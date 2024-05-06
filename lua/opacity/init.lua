@@ -377,15 +377,6 @@ shade.change_brightness = function(level)
     end))
 end
 
-shade.change_focus_brightness = function(level)
-  local curr_winid = api.nvim_get_current_win()
-  state.overlay_opacity = level
-  for id, w in pairs(state.active_overlays) do
-    log("winblend: winid" .. w.winid, level)
-    api.nvim_win_set_option(w.winid, "winblend", level)
-  end
-end
-
 -- Main
 local M = {}
 
@@ -422,19 +413,24 @@ M.brightness_down = function()
 end
 
 M.focus_lost = function()
-  local adjusted = 20 + state.opacity_step
-  if adjusted > 99 then
-    adjusted = 99
+  state.overlay_opacity = 20
+  for _, w in pairs(state.active_overlays) do
+    log("winblend: winid" .. w.winid, 20)
+    api.nvim_win_set_option(w.winid, "winblend", 20)
   end
-  shade.change_focus_brightness(adjusted)
 end
 
 M.focus_get = function()
-  local adjusted = 50
-  if adjusted > 99 then
-    adjusted = 99
+  local curr_winid = api.nvim_get_current_win()
+  state.overlay_opacity = 50
+  for id, w in pairs(state.active_overlays) do
+    if id ~= curr_winid then
+      log("winblend: winid" .. w.winid, 50)
+      api.nvim_win_set_option(w.winid, "winblend", 50)
+    else
+      api.nvim_win_set_option(w.winid, "winblend", 99)
+    end
   end
-  shade.change_brightness(adjusted)
 end
 
 M.toggle = function()
